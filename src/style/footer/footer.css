@@ -1,0 +1,16 @@
+footer{
+    background-color: var(--veryDarkViolet);
+    color: white;
+}
+footer h5,h2{
+    color: white;
+    font-weight: 600;
+}
+footer a {
+    color:var(--grey);
+    font-weight: 400;
+
+}
+footer a:hover{
+    color: var(--cyan);
+}

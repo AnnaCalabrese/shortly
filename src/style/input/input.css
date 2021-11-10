@@ -1,0 +1,78 @@
+.input-container{
+    background-color: var(--greyViolet);
+}
+
+.input-form{
+    min-height:17vh;
+}
+form{
+    background-color: var(--veryDarkViolet);
+    padding: 30px;
+    margin:-50px 0;
+}
+form input {
+    outline: none;
+    background-color: var(--greyViolet);
+    color: var(--veryDarkViolet);
+    
+}
+
+.stats-block{
+    position: relative;
+}
+.stat{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: white;
+    width: 300px;
+    z-index: 1;
+    
+}
+.hr-block{
+    position:absolute;
+    width: 50%;
+    top: 150px;
+    background-color: var(--cyan);
+    height: 10px;
+    z-index: 0;
+
+}
+.display-links{    
+    background-color:white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+
+}
+.display-links a{
+    color: var(--veryDarkViolet);
+}
+hr{
+    color: var(--cyan);
+}
+.item-container{
+    background-color: white;
+    box-shadow: rgba(66, 129, 148, 0.61) 0px 3px 8px;
+}
+.item-container a{
+    color:var(--veryDarkViolet);
+}
+.item-container .result-col small{
+    background-color: var(--cyan);
+    
+}
+.btn-copy{
+    background-color: white;
+    
+}
+
+@media (max-width:760px){
+    .hr-block{
+        width: 1px; 
+        background-color: var(--cyan);
+        height: 600px;
+        float: left;
+        position: absolute;
+        top: 100px;
+    }
+
+
+}
