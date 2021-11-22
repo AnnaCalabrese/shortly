@@ -6,17 +6,18 @@ import icondetailedrecords from '../images/icon-detailed-records.svg';
 import iconfullycustomizable from '../images/icon-fully-customizable.svg';
 import axios, { Axios } from 'axios'
 import ShortenedLink from './ShortenedLink';
-import Tippy from '@tippyjs/react'
-import 'tippy.js/dist/tippy.css'
+import validator from 'validator';
+import {completeData} from "../contexts/completeData.js"
+
+
+
 function Input(){
      
-    
     const [link, setLink] = useState("");
-    const [originalLink, setOriginalLink] = useState('');
-    const [result,setResult] = useState('')
+    const [result,setResult] = useState("")
 
     
-        /////////////////////// LOCAL STORAGE /////////////////
+    /////////////////////// LOCAL STORAGE /////////////////
 
     const getLocalItems = () =>{
         let list =localStorage.getItem('complete');
@@ -26,26 +27,41 @@ function Input(){
             return[]
         }
     }
-
-
-
+       
     const [complete, setComplete] = useState(getLocalItems())
 
-    const submit = (e) =>{
-        
-        e.preventDefault();        
-        setOriginalLink(link);
-        setComplete([...complete,{link, result}])
-        setLink('')
-        
-    }   
+    /////////////////////// FORM VALIDATION /////////////////
 
+    
+
+
+ /////////////////////// SUBMIT /////////////////
+
+        const onChange = (e) =>{
+            setLink(e.target.value);
+            
+        }
+            
+
+    const submit = (e) =>{
+        if (validator.isURL(link)) {
+        e.preventDefault();  
+        setLink('')        
+        setComplete([...complete,{link, result}])
+            console.log('Is Valid URL')
+        } else {
+            e.preventDefault();  
+            alert("Not a link. Try again.")
+        }
+    }   
+   
    
     /////////////////////// API REQUEST /////////////////
 
     useEffect(()=>{
         async function fetchData(){
             const request = await axios.get(`https://api.shrtco.de/v2/shorten?url=${link}`).then((response)=>{
+                console.log(response)
                 setResult(response.data.result.short_link)
              }).catch(err =>{
                  console.log(err)
@@ -54,10 +70,7 @@ function Input(){
         fetchData()
     },[link])
 
-
-    const Delete = () =>{
-        setComplete(complete.filter(el => el.id !== complete.id))
-       }
+    
 
     //////////////////////////////////////////////
     return(
@@ -65,26 +78,16 @@ function Input(){
 
             <div className="input-form d-flex   justify-content-center">
                 <form onSubmit={submit} className="container  d-md-flex justify-content-md-center align-items-md-center text-center rounded p-4 position-absolute w-100">
-                    <input type="text" id="shorten-link" value={link} onChange={(e) => setLink(e.target.value)} className="col-md-8 col-12 p-2 rounded-pill" type="text" required placeholder="Shorten your link here..." />
+                    <input type="url" id="shorten-link" value={link} onChange={onChange}  className="col-md-8 col-12 p-2 rounded-pill" type="text" required placeholder="Shorten your link here..." />
                     <button type="submit" className="btn my-1 d-flex mx-auto mx-md-2 btn-outline-light mx-2  my-md-0 " >Shorten it!</button>
 
 
-                    <Tippy content="Delete all">
-                        <button onClick={Delete} className="button-30 btn-delete" role="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-eraser" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M19 19h-11l-4 -4a1 1 0 0 1 0 -1.41l10 -10a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.41l-9 9"></path>
-                        <line x1="18" y1="12.3" x2="11.7" y2="6"></line>
-                        </svg>
-                        </button>
-                </Tippy>
                 </form>  
                  
             </div>
-
-            
-            <ShortenedLink complete={complete} setComplete={setComplete} />
-                
+            <completeData.Provider value={{complete, setComplete}}>
+            <ShortenedLink />
+            </completeData.Provider>    
                     
             <div className="stats-container  container my-5">
                 

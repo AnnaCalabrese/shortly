@@ -8,7 +8,7 @@ function App(){
         <div>
            <Header/>
            <Input />
-           <Cta />
+            <Cta />
            <Footer/>
         </div>
     )

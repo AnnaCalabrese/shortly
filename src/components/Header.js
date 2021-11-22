@@ -8,33 +8,13 @@ import '../style/main.css'
 function Header(){
     return( 
     <header>
-       <nav className="navbar navbar-expand-lg navbar-light  px-md-5 py-4">
-        <div className="container-fluid p-4 p-md-0 align-items-center">
-            
+       <nav className="navbar navbar-expand-lg navbar-light px-md-5 py-4">
+        <div className="container p-4 p-md-0 justify-content-center align-items-center">
             <a class="navbar-brand" href="#shorten-link">                    
                     <img src={logo} alt="Logo"/>
                 </a>
-                <button className="navbar-toggler border-0 px-md-0 px-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse px-0 px-lg-0" id="navbarTogglerDemo01">
                 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#shorten-link">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#shorten-link">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#shorten-link">Resources</a>
-                    </li> 
-                </ul>
-                    <div class="d-flex">
-                       <a href="#shorten-link">
-                       <button class="btn btn-outline-light" type="submit">Sign Up</button></a>
-                    </div>
-            </div>
+           
         </div>
     </nav>  
 
